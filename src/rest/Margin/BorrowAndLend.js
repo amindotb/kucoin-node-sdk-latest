@@ -2,6 +2,30 @@
 const Http = require('../../lib/http');
 
 /**
+ * @name postOrder
+ * @description Post Borrow Order. This endpoint requires the "Trade" permission.
+ * @param params
+ *   - {string} currency - Currency to Borrow
+ *   - {string} type - Type: FOK, IOC
+ *   - {number} size - Total size
+ *   - {number} maxRate - [Optional] The max interest rate. All interest rates are acceptable if this field is left empty.
+ *   - {string} term - [Optional] Term (Unit: Day). All terms are acceptable if this field is left empty. Please note to separate the terms via comma. For example, 7,14,28.
+ * @return {Object} { code, success, data }
+ */
+exports.postOrder = async function postOrder(params = {}) {
+  /*
+  {
+    "code": "200000",     
+    "data": {
+      "orderId": "a2111213",
+      "currency": "USDT"
+    }
+  }
+  */
+  return await Http().POST('/api/v1/margin/order', { ...params });
+};
+
+/**
  * @name postBorrowOrder
  * @description Post Borrow Order. This endpoint requires the "Trade" permission.
  * @param params
